@@ -1,0 +1,17 @@
+{
+  "name": "cine-app",
+  "displayName": "cine-app",
+  "expo": {
+    "name": "cine-app",
+    "slug": "cine-app",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
