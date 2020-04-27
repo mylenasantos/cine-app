@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { Header, Main } from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { Text, View } from 'react-native';
+import styles from './styles';
 
 
 class Navbar extends Component {
 
     render() {
         return (
-        <>
-         <Header>
-         <FontAwesomeIcon icon="coffee" />
-         </Header>
-         <Main />   
-        </>
-        )
+         <View style={styles.container} />
+        );
     }
 };
 
