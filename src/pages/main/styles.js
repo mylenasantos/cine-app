@@ -29,19 +29,18 @@ const styles = StyleSheet.create({
       borderBottomWidth: StyleSheet.hairlineWidth
    },
    item: {
-      width: screenWidth - 60,
+      width: screenWidth - 90,
       height: screenWidth,
       marginTop: 10,
     },
     imageContainer: {
       flex: 1,
       marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
-      backgroundColor: 'white',
-      borderRadius: 8,
+      backgroundColor: 'transparent',
     },
     image: {
       ...StyleSheet.absoluteFillObject,
-      resizeMode: 'cover',
+      resizeMode: 'contain',
     },
     title: {
        fontWeight: 'bold',
