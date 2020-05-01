@@ -9,54 +9,53 @@ import { Dimensions } from 'react-native';
 import styles from './styles';
 
 const { width: screenWidth } = Dimensions.get('window')
+
 class Main extends Component {
     state = {
-     films: ['data'],
+     films: [],
      apiKey: 'f2396906',
     };
 
     componentDidMount() {
-      // this.handleFilms();
-      
+      this.handleFilms();
     }
+    
     _renderItem ({item, index}, parallaxProps) {
-      return (
-          <View style={styles.item}>
+        return (
+          <View style={styles.item} key={index}>
               <ParallaxImage
-                  source={{ uri: item.thumbnail }}
+                  source={{ uri: item.Poster }}
                   containerStyle={styles.imageContainer}
                   style={styles.image}
                   parallaxFactor={0.4}
                   {...parallaxProps}
               />
-              <Text style={styles.title} numberOfLines={2}>
-                  { item.title }
-              </Text>
+              <View style={styles.text}>
+                <Text style={styles.title} numberOfLines={2}>
+                    {item.film.Name}
+                </Text>
+              </View>
           </View>
       );
   }
 
     handleFilms = async () => {
      const response = await apiInterceptor.get('/exhibitions');
-     console.log('response =>', response);
 
     if (response && response.status === 200) {
          this.setState({ films: response.data }, () => {
-          this.handleImageFilm();
+           this.handleImageFilm();
          });
      }
     };
 
     handleImageFilm = async () => {
-      const { apiKey, films } = this.state;
-      console.log('state film =>', this.state.films)
-      const apiCode = this.state.films.map((item => {
-      return item.film.ApiCode;
-    }));
-    console.log('apiCode state =>', apiCode);
-
-    const responseOMDB = await apiOMDB.get(`/?apiKey=${apiKey}&i=${apiCode}`);
-    console.log('imagem =>', responseOMDB);
+      const { films, apiKey } = this.state;
+      const promises = films.map(async (film) => {
+        const responseOMDB = await apiOMDB.get(`/?apiKey=${apiKey}&i=${film.film.ApiCode}`);
+        return {... film, Poster: responseOMDB.data.Poster };
+      })
+      this.setState({ films: await Promise.all(promises) });
     };
 
     render() {
@@ -64,26 +63,22 @@ class Main extends Component {
         return (
          <View>
           <Navbar />
-          <View style={styles.filmExView}>
-           <Text style={styles.filmEx}>Filmes em cartaz</Text>
-          </View>
-          {films && films.map((item) => {
-            return (
-            <View key={item.FilmId} style={styles.container}>
-              <Carousel
-                sliderWidth={screenWidth}
-                sliderHeight={screenWidth}
-                itemWidth={screenWidth - 60}
-                data={this.state.films}
-                renderItem={this._renderItem}
-                hasParallaxImages={true}
-            />
+          <View style={styles.content}>
+            <View style={styles.filmExView}>
+              <Text style={styles.filmEx}>Filmes em cartaz</Text>
             </View>
-            ) 
-          })}
-            
-         
-         </View>
+              <View style={styles.container}>
+                <Carousel
+                  sliderWidth={screenWidth}
+                  sliderHeight={screenWidth}
+                  itemWidth={screenWidth - 60}
+                  data={this.state.films}
+                  renderItem={this._renderItem}
+                  hasParallaxImages={true}
+                />
+            </View>
+          </View>
+        </View>
         )
     }
 };

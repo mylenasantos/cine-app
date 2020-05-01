@@ -1,11 +1,16 @@
 import { Dimensions, StyleSheet } from 'react-native';
-const { width: screenWidth } = Dimensions.get('window')
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
    container: {
       marginTop: 30,
+      justifyContent: 'column',
+      alignItems: 'center',
       justifyContent: 'center',
-      flexDirection: 'row',
+   },
+   content: {
+      backgroundColor: '#fbe9e7',
+      height: screenHeight,
    },
    nameFilm: {
       fontSize: 14,
@@ -14,16 +19,19 @@ const styles = StyleSheet.create({
    filmEx: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: '#da552f',
+      color: '#212121',
    },
    filmExView: {
       marginTop: 40,
       justifyContent: 'center',
       flexDirection: 'row',
+      borderBottomColor: '#da552f',
+      borderBottomWidth: StyleSheet.hairlineWidth
    },
    item: {
       width: screenWidth - 60,
-      height: screenWidth - 60,
+      height: screenWidth,
+      marginTop: 10,
     },
     imageContainer: {
       flex: 1,
@@ -35,6 +43,18 @@ const styles = StyleSheet.create({
       ...StyleSheet.absoluteFillObject,
       resizeMode: 'cover',
     },
+    title: {
+       fontWeight: 'bold',
+       fontSize: 17,
+       textAlign: 'center',
+       marginTop: 20,
+       color: '#212121'
+    },
+    text: {
+      padding: 4,
+      borderBottomColor: '#da552f',
+      borderBottomWidth: StyleSheet.hairlineWidth
+    }
 });
 
 export default styles;

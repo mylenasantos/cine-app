@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const apiOMDB = axios.create({
-    baseURL: 'http://img.omdbapi.com', 
+    baseURL: 'http://www.omdbapi.com', 
 });
 
 export default apiOMDB;
