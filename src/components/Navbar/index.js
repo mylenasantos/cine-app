@@ -7,7 +7,8 @@ class Navbar extends Component {
 
     render() {
         return (
-         <View style={styles.container} />
+         <View style={styles.container}>
+         </View>
         );
     }
 };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import { withNavigation } from 'react-navigation';
 import apiInterceptor from '../../services/apiInterceptor';
@@ -10,7 +10,10 @@ import styles from './styles';
 
 const { width: screenWidth } = Dimensions.get('window')
 
-class Main extends Component {
+export default class Main extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Filmes em Cartaz',
+  };
     state = {
      films: [],
      apiKey: 'f2396906',
@@ -82,5 +85,3 @@ class Main extends Component {
         )
     }
 };
-
-export default withNavigation(Main);
