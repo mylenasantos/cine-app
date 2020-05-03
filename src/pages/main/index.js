@@ -65,7 +65,7 @@ export default class Main extends React.Component {
         const { films } = this.state;
         return (
          <View>
-          <Navbar />
+          <Navbar navigation={this.props.navigation} />
           <View style={styles.content}>
             <View style={styles.filmExView}>
               <Text style={styles.filmEx}>Filmes em cartaz</Text>
